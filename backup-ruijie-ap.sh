@@ -2,6 +2,7 @@
 set timeout 30
 set hostName [lindex $argv 0]
 set hostAlias [lindex $argv 1]
+set tftpAddress [lindex $argv 2]
 
 spawn nc -v $hostName 23
 
@@ -20,7 +21,7 @@ expect -re "# ?$"
 send "dir\r"
 
 expect -re "# ?$"
-send "copy flash:config.text tftp://10.4.231.96/backup/config-${hostAlias}.txt\r"
+send "copy flash:config.text tftp://${tftpAddress}/backup/config-${hostAlias}.txt\r"
 expect eof
 
 
